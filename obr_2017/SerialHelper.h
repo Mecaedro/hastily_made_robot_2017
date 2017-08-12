@@ -4,7 +4,7 @@ void displayHorizontalSeparator() {
 }
 
 void displayVersionInfo() {
-  Serial.println("obr_2017 - v0.2.0");
+  Serial.println("obr_2017 - v0.4.0");
   Serial.println("Aug 12, 2017");
   displayHorizontalSeparator();
 }

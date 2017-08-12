@@ -59,7 +59,7 @@ void setupColorSensorsPins() {
    * LH = 2%
    * HL = 20%
    * HH = 100%;
-   * 
+   *
    */
   digitalWrite(l_s0, HIGH);
   digitalWrite(l_s1, LOW);
@@ -72,7 +72,7 @@ void getColorsFromLeftSensor() {
   digitalWrite(l_s2, LOW);
   digitalWrite(l_s3, LOW);
   l_red = pulseIn(l_out, digitalRead(l_out) == HIGH ? LOW : HIGH);
-  
+
   // Get blue photodiodes value
   digitalWrite(l_s2, LOW);
   digitalWrite(l_s3, HIGH);
@@ -82,7 +82,7 @@ void getColorsFromLeftSensor() {
   digitalWrite(l_s2, HIGH);
   digitalWrite(l_s3, LOW);
   l_clear = pulseIn(l_out, digitalRead(l_out) == HIGH ? LOW : HIGH);
-  
+
   // Get green photodiodes value
   digitalWrite(l_s2, HIGH);
   digitalWrite(l_s3, HIGH);
@@ -92,9 +92,9 @@ void getColorsFromLeftSensor() {
 void getColorsFromRightSensor() {
   // Get red photodiodes value
   digitalWrite(r_s2, LOW);
-  digitalWrite(r_s3, LOW);  
+  digitalWrite(r_s3, LOW);
   r_red = pulseIn(r_out, digitalRead(r_out) == HIGH ? LOW : HIGH);
-  
+
   // Get blue photodiodes value
   digitalWrite(r_s2, LOW);
   digitalWrite(r_s3, HIGH);
@@ -104,7 +104,7 @@ void getColorsFromRightSensor() {
   digitalWrite(r_s2, HIGH);
   digitalWrite(r_s3, LOW);
   r_clear = pulseIn(r_out, digitalRead(r_out) == HIGH ? LOW : HIGH);
-  
+
   // Get green photodiodes value
   digitalWrite(r_s2, HIGH);
   digitalWrite(r_s3, HIGH);
@@ -122,7 +122,7 @@ void displayColorSensorsValues() {
 
   Serial.println(left_rgb);
   Serial.println(right_rgb);
-  
+
   Serial.flush();
 }
 
@@ -132,7 +132,7 @@ bool leftSensorIndicatesGreen() {
     lastEv = 0;
     return true;
   }
-  
+
   return false;
 }
 
@@ -141,7 +141,7 @@ bool rightSensorIndicatesGreen() {
     lastEv = 1;
     return true;
   }
-  
+
   return false;
 }
 
@@ -150,7 +150,7 @@ bool leftSensorIndicatesBlack() {
     lastEv = 2;
     return true;
   }
-  
+
   return false;
 }
 
@@ -159,6 +159,6 @@ bool rightSensorIndicatesBlack() {
     lastEv = 3;
     return true;
   }
-  
+
   return false;
 }

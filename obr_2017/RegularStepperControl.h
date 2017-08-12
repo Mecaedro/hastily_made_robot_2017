@@ -19,14 +19,26 @@ void setupRegularStepperControl() {
 }
 
 void goForward() {
-  stepper_on_the_right.onestep(BACKWARD, SINGLE); 
-  stepper_on_the_left.onestep(BACKWARD, SINGLE); 
+  stepper_on_the_right.onestep(BACKWARD, SINGLE);
+  stepper_on_the_left.onestep(BACKWARD, SINGLE);
+  delay(20);
+}
+
+void goForwardWithMoreTorque() {
+  stepper_on_the_right.onestep(BACKWARD, DOUBLE);
+  stepper_on_the_left.onestep(BACKWARD, DOUBLE);
   delay(20);
 }
 
 void goBackward() {
-  stepper_on_the_right.onestep(FORWARD, SINGLE); 
-  stepper_on_the_left.onestep(FORWARD, SINGLE); 
+  stepper_on_the_right.onestep(FORWARD, SINGLE);
+  stepper_on_the_left.onestep(FORWARD, SINGLE);
+  delay(20);
+}
+
+void goBackwardWithMoreTorque() {
+  stepper_on_the_right.onestep(FORWARD, DOUBLE);
+  stepper_on_the_left.onestep(FORWARD, DOUBLE);
   delay(20);
 }
 
@@ -78,3 +90,39 @@ void turnRightUntilNoMoreLeftBlack() {
   updateMotorsSpeed();
 }
 
+void goAroundObject() {
+  // Turn right
+  leftMotorSpeed = 32;
+  rightMotorSpeed = 24;
+  updateMotorsSpeed();
+  unsigned long start = millis();
+  while(millis() > (start+2000) {
+    updateColorSensorsValues();
+    goForward(); // "kind of"
+  }
+
+  // Go straight
+  leftMotorSpeed = 32;
+  rightMotorSpeed = 32;
+  updateMotorsSpeed();
+  unsigned long start = millis();
+  while(millis() > (start+2000) {
+    updateColorSensorsValues();
+    goForward(); // "kind of"
+  }
+
+  // Turn left again
+  leftMotorSpeed = 24;
+  rightMotorSpeed = 32;
+  updateMotorsSpeed();
+  unsigned long start = millis();
+  while(millis() > (start+2000) {
+    updateColorSensorsValues();
+    goForward(); // "kind of"
+  }
+
+  // Reset
+  leftMotorSpeed = 32;
+  rightMotorSpeed = 32;
+  updateMotorsSpeed();
+}

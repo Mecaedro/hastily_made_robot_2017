@@ -1,6 +1,6 @@
 /*
 #
-# obr_2017.ino - v0.3.0
+# obr_2017.ino - v0.4.0
 # Made by Flávio Monteiro
 # Aug 12, 2017
 #
@@ -11,7 +11,6 @@
 #include "SerialHelper.h"
 #include "ColorSensors.h"
 #include "RegularStepperControl.h"
-//#include "QuirkyStepperControl"
 #include "UltrasonicSensor.h"
 
 void setup() {
@@ -28,7 +27,7 @@ void loop() {
   while((!leftSensorIndicatesGreen()) || (!rightSensorIndicatesGreen()) || (!leftSensorIndicatesBlack()) || (!rightSensorIndicatesBlack()) || (!distanceToHitSomethingSmall())) {
     updateColorSensorsValues();
     updateUltrasonicSensorDistance();
-    
+
     goForward();
   }
 
@@ -46,6 +45,10 @@ void loop() {
 
   if(lastEv == 3) {
     turnLeftUntilNoMoreRightBlack();
+  }
+
+  if(lastEv == 4) {
+    goAroundObject();
   }
 }
 
