@@ -1,16 +1,17 @@
-#include <Stepper.h>
+#include <AccelStepper.h>
+#include <AFMotor.h>
 
 const byte stepsPerRevolution = 128;
 
 int leftMotorSpeed = 32;
 int rightMotorSpeed = 32;
 
-Stepper stepper_on_the_left(stepsPerRevolution, 4, 5, 6, 7);
-Stepper stepper_on_the_right(stepsPerRevolution, 11, 10, 9, 8);
+AF_Stepper stepper_on_the_left(stepsPerRevolution, 1);
+AF_Stepper stepper_on_the_right(stepsPerRevolution, 2);
 
 void updateMotorsSpeed() {
-  stepper_on_the_right.setSpeed(leftMotorSpeed);
   stepper_on_the_left.setSpeed(rightMotorSpeed);
+  stepper_on_the_right.setSpeed(leftMotorSpeed);
 }
 
 void setupRegularStepperControl() {
@@ -18,14 +19,14 @@ void setupRegularStepperControl() {
 }
 
 void goForward() {
-  stepper_on_the_right.step(-1); 
-  stepper_on_the_left.step(-1); 
+  stepper_on_the_right.onestep(BACKWARD, SINGLE); 
+  stepper_on_the_left.onestep(BACKWARD, SINGLE); 
   delay(20);
 }
 
 void goBackward() {
-  stepper_on_the_right.step(1); 
-  stepper_on_the_left.step(1);
+  stepper_on_the_right.onestep(FORWARD, SINGLE); 
+  stepper_on_the_left.onestep(FORWARD, SINGLE); 
   delay(20);
 }
 

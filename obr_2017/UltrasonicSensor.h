@@ -2,11 +2,17 @@
 
 ST_HW_HC_SR04 ultrasonicSensor(41, 40); // ST_HW_HC_SR04(TRIG, ECHO)
 
-void displayUltrasonicSensorValues() {
-  int hitTime = ultrasonicSensor.getHitTime();
-  int distanceInCm = hitTime / 29;
+int distance = 0;
 
-  String msg = String("hitTime=") + hitTime + String("microseconds, ") + String("realDistance=") + distanceInCm + String("cm");
-  Serial.println(msg);
+bool distanceToHitSomethingSmall() {
+  /*if(distance < 8) {
+    return true;
+  }*/
+
+  return false;
+}
+
+void updateUltrasonicSensorDistance() {
+  distance = ultrasonicSensor.getHitTime() / 29;
 }
 

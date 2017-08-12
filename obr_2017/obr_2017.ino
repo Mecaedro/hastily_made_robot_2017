@@ -1,8 +1,8 @@
 /*
 #
-# obr_2017.ino - v0.2.0
+# obr_2017.ino - v0.3.0
 # Made by Flávio Monteiro
-# Aug 11, 2017
+# Aug 12, 2017
 #
 # MIT License
 #
@@ -21,10 +21,14 @@ void setup() {
   setupColorSensorsPins();
   setupRegularStepperControl();
   getColorSensorsInitialValues();
+
+  ultrasonicSensor.setTimeout(5000); // 5ms
 }
 void loop() {
-  while((!leftSensorIndicatesGreen()) || (!rightSensorIndicatesGreen()) || (!leftSensorIndicatesBlack()) || (!rightSensorIndicatesBlack())) {
+  while((!leftSensorIndicatesGreen()) || (!rightSensorIndicatesGreen()) || (!leftSensorIndicatesBlack()) || (!rightSensorIndicatesBlack()) || (!distanceToHitSomethingSmall())) {
     updateColorSensorsValues();
+    updateUltrasonicSensorDistance();
+    
     goForward();
   }
 
