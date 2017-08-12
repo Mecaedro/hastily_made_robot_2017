@@ -95,8 +95,8 @@ void goAroundObject() {
   leftMotorSpeed = 32;
   rightMotorSpeed = 24;
   updateMotorsSpeed();
-  unsigned long start = millis();
-  while(millis() > (start+2000) {
+  unsigned long  start = millis();
+  while(millis() > (start+2000)) {
     updateColorSensorsValues();
     goForward(); // "kind of"
   }
@@ -105,8 +105,8 @@ void goAroundObject() {
   leftMotorSpeed = 32;
   rightMotorSpeed = 32;
   updateMotorsSpeed();
-  unsigned long start = millis();
-  while(millis() > (start+2000) {
+  start = millis();
+  while(millis() > (start+2000)) {
     updateColorSensorsValues();
     goForward(); // "kind of"
   }
@@ -115,8 +115,8 @@ void goAroundObject() {
   leftMotorSpeed = 24;
   rightMotorSpeed = 32;
   updateMotorsSpeed();
-  unsigned long start = millis();
-  while(millis() > (start+2000) {
+  start = millis();
+  while(millis() > (start+2000)) {
     updateColorSensorsValues();
     goForward(); // "kind of"
   }

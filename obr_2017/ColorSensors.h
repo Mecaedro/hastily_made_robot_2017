@@ -124,7 +124,7 @@ bool leftSensorIndicatesGreen() {
 }
 
 bool rightSensorIndicatesGreen() {
-  if(l_green > 70 && l_green < 86) {{
+  if(l_green > 70 && l_green < 86) {
     lastEv = 1;
     return true;
   }
