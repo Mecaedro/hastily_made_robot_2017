@@ -12,18 +12,6 @@ const byte l_s2  = 24;
 const byte l_s3  = 25;
 const byte l_out = 26;
 
-// Left light sensor initial RGBC
-int lls_r = 0;
-int lls_g = 0;
-int lls_b = 0;
-int lls_c = 0;
-
-// Right light sensor initial RGBC
-int rls_r = 0;
-int rls_g = 0;
-int rls_b = 0;
-int rls_c = 0;
-
 // Last detected input
 int lastEv = -1; // 0=lgreen (turn lef)t, 1=rgreen (turn right), 2=lblack (turn right), 3=rblack (turn left)
 
@@ -126,9 +114,8 @@ void displayColorSensorsValues() {
   Serial.flush();
 }
 
-
 bool leftSensorIndicatesGreen() {
-  if(l_green > (lls_g + 21) && l_green < (lls_g + 49)) {
+  if(l_green > 70 && l_green < 91) {
     lastEv = 0;
     return true;
   }
@@ -137,7 +124,7 @@ bool leftSensorIndicatesGreen() {
 }
 
 bool rightSensorIndicatesGreen() {
-  if(r_green > (rls_g + 21) && r_green < (rls_g + 49)) {
+  if(l_green > 70 && l_green < 86) {{
     lastEv = 1;
     return true;
   }
@@ -146,7 +133,7 @@ bool rightSensorIndicatesGreen() {
 }
 
 bool leftSensorIndicatesBlack() {
-  if(l_red > (lls_r + 45)) {
+  if(l_red > 94) {
     lastEv = 2;
     return true;
   }
@@ -155,7 +142,7 @@ bool leftSensorIndicatesBlack() {
 }
 
 bool rightSensorIndicatesBlack() {
-  if(r_red > (rls_r + 45)) {
+  if(l_red > 90) {
     lastEv = 3;
     return true;
   }

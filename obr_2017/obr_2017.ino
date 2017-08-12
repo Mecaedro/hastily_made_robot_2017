@@ -1,6 +1,6 @@
 /*
 #
-# obr_2017.ino - v0.4.0
+# obr_2017.ino - v0.4.1
 # Made by Flávio Monteiro
 # Aug 12, 2017
 #
@@ -19,7 +19,6 @@ void setup() {
   displayVersionInfo();
   setupColorSensorsPins();
   setupRegularStepperControl();
-  getColorSensorsInitialValues();
 
   ultrasonicSensor.setTimeout(5000); // 5ms
 }
@@ -50,17 +49,4 @@ void loop() {
   if(lastEv == 4) {
     goAroundObject();
   }
-}
-
-
-void getColorSensorsInitialValues() {
-  updateColorSensorsValues();
-  lls_r = l_red;
-  lls_g = l_green;
-  lls_b = l_blue;
-  lls_c = l_clear;
-  rls_r = r_red;
-  rls_g = r_green;
-  rls_b = r_blue;
-  rls_c = r_clear;
 }
