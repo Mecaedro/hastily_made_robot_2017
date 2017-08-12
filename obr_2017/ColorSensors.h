@@ -12,6 +12,21 @@ const byte l_s2  = 24;
 const byte l_s3  = 25;
 const byte l_out = 26;
 
+// Left light sensor initial RGBC
+int lls_r = 0;
+int lls_g = 0;
+int lls_b = 0;
+int lls_c = 0;
+
+// Right light sensor initial RGBC
+int rls_r = 0;
+int rls_g = 0;
+int rls_b = 0;
+int rls_c = 0;
+
+// Last detected input
+int lastEv = -1; // 0=lgreen (turn lef)t, 1=rgreen (turn right), 2=lblack (turn right), 3=rblack (turn left)
+
 // Values acquired in latest fetch
 int l_red = 0;
 int l_green = 0;
@@ -96,10 +111,11 @@ void getColorsFromRightSensor() {
   r_green = pulseIn(r_out, digitalRead(r_out) == HIGH ? LOW : HIGH);
 }
 
-void fetchColorSensorValues() {
+void updateColorSensorsValues() {
   getColorsFromLeftSensor();
   getColorsFromRightSensor();
 }
+
 void displayColorSensorsValues() {
   String left_rgb = String("left:  rgb(") + String(l_red) + String(", ") + String(l_green) + String(", ") + String(l_blue) + String("), clarity=" + String(l_clear));
   String right_rgb = String("right: rgb(") + String(r_red) + String(", ") + String(r_green) + String(", ") + String(r_blue) + String("), clarity=" + String(r_clear));
@@ -108,4 +124,41 @@ void displayColorSensorsValues() {
   Serial.println(right_rgb);
   
   Serial.flush();
+}
+
+
+bool leftSensorIndicatesGreen() {
+  if(l_green > (lls_g + 21) && l_green < (lls_g + 49)) {
+    lastEv = 0;
+    return true;
+  }
+  
+  return false;
+}
+
+bool rightSensorIndicatesGreen() {
+  if(r_green > (rls_g + 21) && r_green < (rls_g + 49)) {
+    lastEv = 1;
+    return true;
+  }
+  
+  return false;
+}
+
+bool leftSensorIndicatesBlack() {
+  if(l_red > (lls_r + 45)) {
+    lastEv = 2;
+    return true;
+  }
+  
+  return false;
+}
+
+bool rightSensorIndicatesBlack() {
+  if(r_red > (rls_r + 45)) {
+    lastEv = 3;
+    return true;
+  }
+  
+  return false;
 }
